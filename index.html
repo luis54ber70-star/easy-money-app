@@ -6,119 +6,78 @@
     <title>Easy Money - Gana Dinero Real</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#10B981">
+    <style>
+        body { background-color: #0f172a; color: white; }
+        .card-gradient { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+    </style>
 </head>
-<body class="bg-gray-900 text-white font-sans selection:bg-green-500">
+<body class="font-sans antialiased">
 
-    <nav class="bg-gray-800 p-4 sticky top-0 z-50 shadow-2xl border-b border-gray-700">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-black text-green-400 tracking-tighter">EASY<span class="text-white">MONEY</span></h1>
-            <div class="bg-gray-900 border border-gray-700 px-4 py-2 rounded-full flex items-center shadow-inner">
-                <i class="fas fa-wallet text-yellow-500 mr-2"></i>
-                <span id="user-balance" class="font-mono font-bold text-lg text-green-400">0.00</span> 
-                <span class="ml-1 text-[10px] text-gray-500 uppercase font-bold">USD</span>
+    <header class="p-6 text-center">
+        <h1 class="text-2xl font-bold text-blue-400 mb-2">EASY MONEY</h1>
+        <div class="card-gradient p-6 rounded-3xl border border-gray-700 shadow-2xl inline-block min-w-[280px]">
+            <p class="text-gray-400 text-sm uppercase tracking-widest mb-1">Tu Saldo Total</p>
+            <div class="text-4xl font-mono font-bold text-green-400">
+                $<span id="user-balance">0.00</span>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="container mx-auto p-4 pb-20 space-y-6">
+    <main class="px-6 space-y-4 max-w-md mx-auto">
         
-        <section class="bg-gradient-to-r from-green-600 to-green-800 p-6 rounded-3xl shadow-lg">
-            <h2 class="text-xl font-bold">¡Bienvenido de nuevo!</h2>
-            <p class="text-green-100 text-sm opacity-90">Completa las tareas de hoy y retira tus ganancias directamente a tu cuenta.</p>
-        </section>
-
-        <section>
-            <h3 class="text-gray-400 uppercase text-xs font-bold mb-4 tracking-widest px-1">Misiones Principales</h3>
-            <div class="grid grid-cols-1 gap-4">
-                
-                <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl flex items-center justify-between active:scale-95 transition-transform" onclick="openOffer('encuestas')">
-                    <div class="flex items-center space-x-4">
-                        <div class="bg-blue-500/20 p-3 rounded-xl text-blue-500">
-                            <i class="fas fa-clipboard-list text-2xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Panel de Encuestas</h4>
-                            <p class="text-gray-500 text-xs">Paga hasta $2.50 USD</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-600"></i>
+        <button onclick="openOffer('encuestas')" 
+                class="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all p-5 rounded-2xl flex items-center justify-between shadow-lg group">
+            <div class="flex items-center space-x-4">
+                <div class="bg-blue-500/30 p-3 rounded-xl group-hover:bg-blue-500/50">
+                    <i class="fas fa-poll text-2xl"></i>
                 </div>
-
-                <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl flex items-center justify-between active:scale-95 transition-transform" onclick="openOffer('tareas')">
-                    <div class="flex items-center space-x-4">
-                        <div class="bg-purple-500/20 p-3 rounded-xl text-purple-500">
-                            <i class="fas fa-th-large text-2xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Muro de Ofertas</h4>
-                            <p class="text-gray-500 text-xs">Instala apps y gana</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-600"></i>
-                </div>
-
-                <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl flex items-center justify-between active:scale-95 transition-transform" onclick="openOffer('juegos')">
-                    <div class="flex items-center space-x-4">
-                        <div class="bg-orange-500/20 p-3 rounded-xl text-orange-500">
-                            <i class="fas fa-gamepad text-2xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Mini Juegos</h4>
-                            <p class="text-gray-500 text-xs">Gana por cada minuto</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-600"></i>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="bg-gray-800 p-6 rounded-3xl border border-gray-700 shadow-xl">
-            <h3 class="font-bold mb-4 flex items-center">
-                <i class="fas fa-money-bill-wave mr-2 text-green-400"></i> Retirar Fondos
-            </h3>
-            <div class="grid grid-cols-2 gap-3">
-                <div class="bg-gray-900 p-4 rounded-2xl border border-gray-700 text-center opacity-60">
-                    <i class="fab fa-paypal text-2xl mb-1"></i>
-                    <p class="text-[10px] font-bold">PAYPAL</p>
-                </div>
-                <div class="bg-gray-900 p-4 rounded-2xl border-2 border-green-500 text-center">
-                    <i class="fas fa-university text-2xl mb-1 text-green-400"></i>
-                    <p class="text-[10px] font-bold text-green-400 text-nowrap">TRANSFERENCIA MX</p>
+                <div class="text-left">
+                    <h3 class="font-bold text-lg text-white">Muro de Encuestas</h3>
+                    <p class="text-xs text-blue-200">Gana hasta $5.00 USD por encuesta</p>
                 </div>
             </div>
-            <button class="w-full mt-6 bg-gray-700 text-gray-400 py-3 rounded-xl font-black text-xs uppercase tracking-widest cursor-not-allowed">
-                Mínimo de retiro $5.00
-            </button>
-        </section>
+            <i class="fas fa-chevron-right text-blue-300"></i>
+        </button>
 
-        <section class="px-2">
-            <div class="flex justify-between items-center mb-3">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Actividad Global</h3>
-                <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-            </div>
-            <div id="activity-log" class="space-y-3">
+        <button onclick="openOffer('tareas')" 
+                class="w-full bg-gray-800 hover:bg-gray-700 active:scale-95 transition-all p-5 rounded-2xl flex items-center justify-between border border-gray-700">
+            <div class="flex items-center space-x-4">
+                <div class="bg-gray-700 p-3 rounded-xl">
+                    <i class="fas fa-tasks text-2xl text-gray-400"></i>
                 </div>
-        </section>
+                <div class="text-left">
+                    <h3 class="font-bold text-lg text-gray-300">Tareas Diarias</h3>
+                    <p class="text-xs text-gray-500">Próximamente disponible</p>
+                </div>
+            </div>
+            <i class="fas fa-lock text-gray-600 text-sm"></i>
+        </button>
 
     </main>
 
-    <div class="fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 px-6 py-3 flex justify-around items-center z-50">
-        <button class="text-green-400 flex flex-col items-center">
+    <section class="mt-8 px-6 max-w-md mx-auto">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase mb-3 ml-2">Actividad Reciente</h2>
+        <div id="activity-log" class="space-y-3">
+            <div class="bg-gray-800/30 p-4 rounded-2xl border border-gray-800 text-center">
+                <p class="text-xs text-gray-600 italic">No hay actividad reciente</p>
+            </div>
+        </div>
+    </section>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-gray-800 p-4 flex justify-around items-center">
+        <button class="text-blue-400 flex flex-col items-center">
             <i class="fas fa-home text-xl"></i>
-            <span class="text-[10px] mt-1 font-bold">Inicio</span>
+            <span class="text-[10px] mt-1">Inicio</span>
         </button>
-        <button class="text-gray-500 flex flex-col items-center" onclick="alert('Próximamente: Sistema de Referidos')">
-            <i class="fas fa-users text-xl"></i>
-            <span class="text-[10px] mt-1 font-bold">Amigos</span>
+        <button onclick="alert('Mínimo de retiro: $10.00 USD')" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-wallet text-xl"></i>
+            <span class="text-[10px] mt-1">Retiros</span>
         </button>
-        <button class="text-gray-500 flex flex-col items-center" onclick="alert('Configuración de Perfil')">
-            <i class="fas fa-user-circle text-xl"></i>
-            <span class="text-[10px] mt-1 font-bold">Perfil</span>
+        <button class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-[10px] mt-1">Perfil</span>
         </button>
-    </div>
+    </nav>
 
     <script src="script.js"></script>
 </body>
