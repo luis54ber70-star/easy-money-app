@@ -3,52 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy Money App</title>
+    <title>Easy Money - Gana Dinero</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background-color: #0b0f1a; color: white; }
+        body { background-color: #0b0f1a; color: white; scroll-behavior: smooth; }
         .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
-<body class="pb-20">
+<body class="pb-24">
 
-    <div class="p-8 text-center">
-        <h1 class="text-xl font-bold text-blue-500 mb-4 tracking-widest">EASY MONEY</h1>
-        <div class="glass-card p-6 rounded-[2rem] shadow-2xl">
-            <p class="text-gray-400 text-xs mb-1">SALDO DISPONIBLE</p>
-            <div class="text-5xl font-bold text-green-400">
-                $<span id="user-balance">0.00</span>
+    <div id="home" class="tab-content active">
+        <div class="p-8 text-center">
+            <h1 class="text-xl font-bold text-blue-500 mb-4 tracking-widest uppercase">Easy Money</h1>
+            <div class="glass-card p-6 rounded-[2.5rem] shadow-2xl">
+                <p class="text-gray-400 text-xs mb-1 uppercase tracking-tighter">Saldo Disponible</p>
+                <div class="text-5xl font-bold text-green-400">$<span id="user-balance">0.00</span></div>
             </div>
+        </div>
+
+        <div class="px-6 space-y-4">
+            <button onclick="openOffer('encuestas')" class="w-full bg-blue-600 p-5 rounded-2xl flex items-center shadow-lg active:scale-95 transition-all">
+                <i class="fas fa-poll text-2xl mr-4"></i>
+                <div class="text-left">
+                    <p class="font-bold">Muro de Encuestas</p>
+                    <p class="text-xs text-blue-200">Encuestas reales pagadas</p>
+                </div>
+            </button>
+
+            <button onclick="compartirApp()" class="w-full bg-indigo-600 p-5 rounded-2xl flex items-center shadow-lg active:scale-95 transition-all">
+                <i class="fas fa-share-alt text-2xl mr-4"></i>
+                <div class="text-left">
+                    <p class="font-bold">Invitar Amigos</p>
+                    <p class="text-xs text-indigo-200">Gana por referidos</p>
+                </div>
+            </button>
         </div>
     </div>
 
-    <div class="px-6 space-y-4">
-        <button onclick="openOffer('encuestas')" class="w-full bg-blue-600 p-5 rounded-2xl flex items-center shadow-lg active:scale-95 transition-transform">
-            <i class="fas fa-poll text-2xl mr-4"></i>
-            <div class="text-left">
-                <p class="font-bold">Muro de Encuestas</p>
-                <p class="text-xs text-blue-200">Gana dinero por tu opinión</p>
+    <div id="wallet" class="tab-content p-6">
+        <h2 class="text-2xl font-bold mb-6 text-center">Retirar Dinero</h2>
+        <div class="glass-card p-6 rounded-2xl space-y-4">
+            <div>
+                <label class="text-xs text-gray-400">Método de Pago</label>
+                <div class="flex items-center bg-gray-900 p-3 rounded-xl border border-gray-700 mt-1">
+                    <i class="fab fa-paypal text-blue-400 mr-3"></i>
+                    <span>PayPal</span>
+                </div>
             </div>
+            <div>
+                <label class="text-xs text-gray-400">Correo Electrónico</label>
+                <input type="email" id="paypal-email" placeholder="tu@correo.com" class="w-full bg-gray-900 p-3 rounded-xl border border-gray-700 mt-1 text-white">
+            </div>
+            <button onclick="solicitarRetiro()" class="w-full bg-green-600 p-4 rounded-xl font-bold shadow-lg">Solicitar Retiro (Mín. $10)</button>
+        </div>
+        <p class="text-center text-gray-500 text-xs mt-4">Los pagos tardan de 24 a 48 horas.</p>
+    </div>
+
+    <nav class="fixed bottom-0 w-full bg-[#0f172a] border-t border-gray-800 p-4 flex justify-around shadow-2xl">
+        <button onclick="switchTab('home')" class="nav-btn text-blue-500 flex flex-col items-center">
+            <i class="fas fa-home text-xl"></i><span class="text-[10px] mt-1">Inicio</span>
         </button>
-
-        <button onclick="openOffer('tareas')" class="w-full bg-gray-800 p-5 rounded-2xl flex items-center opacity-50 cursor-not-allowed">
-            <i class="fas fa-play-circle text-2xl mr-4 text-gray-400"></i>
-            <div class="text-left">
-                <p class="font-bold text-gray-400">Ver Videos</p>
-                <p class="text-xs text-gray-500">Próximamente</p>
-            </div>
+        <button onclick="switchTab('wallet')" class="nav-btn text-gray-500 flex flex-col items-center">
+            <i class="fas fa-wallet text-xl"></i><span class="text-[10px] mt-1">Billetera</span>
         </button>
-    </div>
-
-    <div class="fixed bottom-0 w-full bg-[#0f172a] border-t border-gray-800 p-4 flex justify-around text-gray-500">
-        <div class="text-blue-500 flex flex-col items-center">
-            <i class="fas fa-home"></i><span class="text-[10px]">Inicio</span>
-        </div>
-        <div onclick="alert('Mínimo de retiro: $10.00 USD')" class="flex flex-col items-center">
-            <i class="fas fa-wallet"></i><span class="text-[10px]">Retirar</span>
-        </div>
-    </div>
+    </nav>
 
     <script src="script.js"></script>
 </body>
