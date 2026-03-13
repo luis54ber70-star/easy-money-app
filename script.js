@@ -1,55 +1,59 @@
-// === CONFIGURACIÓN EASY MONEY ===
 const CPX_APP_ID = "31886"; 
 
-// 1. INICIALIZAR DATOS AL CARGAR
+// 1. INICIO Y SALDO
 document.addEventListener('DOMContentLoaded', () => {
-    // Generar ID de usuario si no existe
-    if (!localStorage.getItem('easy_money_user_id')) {
-        const newId = 'user_' + Math.random().toString(36).substring(2, 9);
-        localStorage.setItem('easy_money_user_id', newId);
-    }
-    
-    // Revisar si venimos de una encuesta con dinero
-    revisarPremios();
-    
-    // Mostrar el saldo guardado
     actualizarPantalla();
-});
-
-// 2. DETECTAR PREMIOS DESDE LA URL
-function revisarPremios() {
     const params = new URLSearchParams(window.location.search);
     const monto = params.get('amount_usd');
-
-    if (monto && parseFloat(monto) > 0) {
-        let saldoActual = parseFloat(localStorage.getItem('saldo_real') || "0.00");
-        saldoActual += parseFloat(monto);
-        
-        // Guardar nuevo saldo
-        localStorage.setItem('saldo_real', saldoActual.toFixed(2));
-        
-        // Notificar al usuario
-        alert("¡Felicidades! Ganaste $" + monto + " USD");
-        
-        // Limpiar la URL para no sumar doble
+    if (monto) {
+        let saldo = parseFloat(localStorage.getItem('saldo_real') || "0.00");
+        saldo += parseFloat(monto);
+        localStorage.setItem('saldo_real', saldo.toFixed(2));
+        alert("¡Recibiste $" + monto + " USD!");
         window.history.replaceState({}, document.title, window.location.pathname);
+        actualizarPantalla();
     }
-}
+});
 
-// 3. ACTUALIZAR INTERFAZ
 function actualizarPantalla() {
-    const saldo = localStorage.getItem('saldo_real') || "0.00";
-    const el = document.getElementById('user-balance');
-    if (el) el.innerText = saldo;
+    document.getElementById('user-balance').innerText = localStorage.getItem('saldo_real') || "0.00";
 }
 
-// 4. ABRIR ENCUESTAS
-function openOffer(tipo) {
-    if (tipo === 'encuestas') {
-        const uid = localStorage.getItem('easy_money_user_id');
-        const url = `https://publisher.cpx-research.com/index.php?app_id=${CPX_APP_ID}&ext_user_id=${uid}`;
-        window.open(url, '_blank');
+// 2. CAMBIO DE PESTAÑAS
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.replace('text-blue-500', 'text-gray-500'));
+    event.currentTarget.classList.replace('text-gray-500', 'text-blue-500');
+}
+
+// 3. COMPARTIR APP
+function compartirApp() {
+    const texto = `¡Mira esta app para ganar dinero! 🤑 Regístrate aquí: ${window.location.href}`;
+    if (navigator.share) {
+        navigator.share({ title: 'Easy Money', text: texto, url: window.location.href });
     } else {
-        alert("Esta sección se activará pronto.");
+        alert("Copia tu link: " + window.location.href);
     }
+}
+
+// 4. SOLICITAR RETIRO
+function solicitarRetiro() {
+    const saldo = parseFloat(localStorage.getItem('saldo_real') || "0.00");
+    const email = document.getElementById('paypal-email').value;
+
+    if (saldo < 10) {
+        alert("Necesitas al menos $10.00 USD. ¡Sigue completando encuestas!");
+    } else if (!email.includes("@")) {
+        alert("Escribe un correo de PayPal válido.");
+    } else {
+        alert("Solicitud enviada para: " + email + ". Revisaremos tu actividad.");
+        // Aquí podrías conectar un servicio de correo si quisieras recibir la notificación
+    }
+}
+
+function openOffer(tipo) {
+    const uid = localStorage.getItem('easy_money_user_id') || 'user_' + Math.random().toString(36).substring(7);
+    window.open(`https://publisher.cpx-research.com/index.php?app_id=${CPX_APP_ID}&ext_user_id=${uid}`, '_blank');
 }
