@@ -6,71 +6,119 @@
     <title>Easy Money - Gana Dinero Real</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#10B981">
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white font-sans selection:bg-green-500">
 
-    <nav class="bg-gray-800 p-4 sticky top-0 z-50 shadow-lg">
+    <nav class="bg-gray-800 p-4 sticky top-0 z-50 shadow-2xl border-b border-gray-700">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-green-400">EASY <span class="text-white">MONEY</span></h1>
-            <div class="bg-gray-700 px-4 py-2 rounded-full flex items-center">
-                <i class="fas fa-coins text-yellow-400 mr-2"></i>
-                <span id="user-balance" class="font-bold">0.00</span> <span class="ml-1 text-xs text-gray-400">USD</span>
+            <h1 class="text-2xl font-black text-green-400 tracking-tighter">EASY<span class="text-white">MONEY</span></h1>
+            <div class="bg-gray-900 border border-gray-700 px-4 py-2 rounded-full flex items-center shadow-inner">
+                <i class="fas fa-wallet text-yellow-500 mr-2"></i>
+                <span id="user-balance" class="font-mono font-bold text-lg text-green-400">0.00</span> 
+                <span class="ml-1 text-[10px] text-gray-500 uppercase font-bold">USD</span>
             </div>
         </div>
     </nav>
 
-    <main class="container mx-auto p-4 space-y-8">
+    <main class="container mx-auto p-4 pb-20 space-y-6">
         
+        <section class="bg-gradient-to-r from-green-600 to-green-800 p-6 rounded-3xl shadow-lg">
+            <h2 class="text-xl font-bold">¡Bienvenido de nuevo!</h2>
+            <p class="text-green-100 text-sm opacity-90">Completa las tareas de hoy y retira tus ganancias directamente a tu cuenta.</p>
+        </section>
+
         <section>
-            <h2 class="text-xl font-semibold mb-4">Misiones Disponibles</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <h3 class="text-gray-400 uppercase text-xs font-bold mb-4 tracking-widest px-1">Misiones Principales</h3>
+            <div class="grid grid-cols-1 gap-4">
                 
-                <div class="bg-gray-800 border-l-4 border-blue-500 p-5 rounded-lg shadow-md hover:scale-105 transition-transform cursor-pointer" onclick="openOffer('encuestas')">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-bold text-lg">Panel de Encuestas</h3>
-                            <p class="text-gray-400 text-sm">Gana hasta $2.50 por encuesta.</p>
+                <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl flex items-center justify-between active:scale-95 transition-transform" onclick="openOffer('encuestas')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-blue-500/20 p-3 rounded-xl text-blue-500">
+                            <i class="fas fa-clipboard-list text-2xl"></i>
                         </div>
-                        <i class="fas fa-poll-h text-blue-500 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold">Panel de Encuestas</h4>
+                            <p class="text-gray-500 text-xs">Paga hasta $2.50 USD</p>
+                        </div>
                     </div>
-                    <button class="mt-4 w-full bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold text-sm">EMPEZAR</button>
+                    <i class="fas fa-chevron-right text-gray-600"></i>
                 </div>
 
-                <div class="bg-gray-800 border-l-4 border-green-500 p-5 rounded-lg shadow-md hover:scale-105 transition-transform cursor-pointer" onclick="openOffer('tareas')">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-bold text-lg">Muro de Tareas</h3>
-                            <p class="text-gray-400 text-sm">Descarga apps y completa niveles.</p>
+                <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl flex items-center justify-between active:scale-95 transition-transform" onclick="openOffer('tareas')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-purple-500/20 p-3 rounded-xl text-purple-500">
+                            <i class="fas fa-th-large text-2xl"></i>
                         </div>
-                        <i class="fas fa-tasks text-green-500 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold">Muro de Ofertas</h4>
+                            <p class="text-gray-500 text-xs">Instala apps y gana</p>
+                        </div>
                     </div>
-                    <button class="mt-4 w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold text-sm">VER MURO</button>
+                    <i class="fas fa-chevron-right text-gray-600"></i>
                 </div>
 
-                <div class="bg-gray-800 border-l-4 border-purple-500 p-5 rounded-lg shadow-md hover:scale-105 transition-transform cursor-pointer" onclick="openOffer('juegos')">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-bold text-lg">Mini Juegos</h3>
-                            <p class="text-gray-400 text-sm">Juega y acumula puntos por minuto.</p>
+                <div class="bg-gray-800 border border-gray-700 p-5 rounded-2xl flex items-center justify-between active:scale-95 transition-transform" onclick="openOffer('juegos')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-orange-500/20 p-3 rounded-xl text-orange-500">
+                            <i class="fas fa-gamepad text-2xl"></i>
                         </div>
-                        <i class="fas fa-gamepad text-purple-500 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold">Mini Juegos</h4>
+                            <p class="text-gray-500 text-xs">Gana por cada minuto</p>
+                        </div>
                     </div>
-                    <button class="mt-4 w-full bg-purple-600 hover:bg-purple-700 py-2 rounded font-bold text-sm">JUGAR YA</button>
+                    <i class="fas fa-chevron-right text-gray-600"></i>
                 </div>
 
             </div>
         </section>
 
-        <section class="bg-gray-800 p-6 rounded-xl">
-            <h2 class="text-lg font-bold mb-4 flex items-center">
-                <i class="fas fa-history mr-2 text-gray-400"></i> Actividad Reciente
-            </h2>
-            <div id="activity-log" class="text-sm text-gray-400 space-y-2">
-                <p>Cargando actividades recientes...</p>
+        <section class="bg-gray-800 p-6 rounded-3xl border border-gray-700 shadow-xl">
+            <h3 class="font-bold mb-4 flex items-center">
+                <i class="fas fa-money-bill-wave mr-2 text-green-400"></i> Retirar Fondos
+            </h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-gray-900 p-4 rounded-2xl border border-gray-700 text-center opacity-60">
+                    <i class="fab fa-paypal text-2xl mb-1"></i>
+                    <p class="text-[10px] font-bold">PAYPAL</p>
+                </div>
+                <div class="bg-gray-900 p-4 rounded-2xl border-2 border-green-500 text-center">
+                    <i class="fas fa-university text-2xl mb-1 text-green-400"></i>
+                    <p class="text-[10px] font-bold text-green-400 text-nowrap">TRANSFERENCIA MX</p>
+                </div>
             </div>
+            <button class="w-full mt-6 bg-gray-700 text-gray-400 py-3 rounded-xl font-black text-xs uppercase tracking-widest cursor-not-allowed">
+                Mínimo de retiro $5.00
+            </button>
+        </section>
+
+        <section class="px-2">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Actividad Global</h3>
+                <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+            </div>
+            <div id="activity-log" class="space-y-3">
+                </div>
         </section>
 
     </main>
+
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 px-6 py-3 flex justify-around items-center z-50">
+        <button class="text-green-400 flex flex-col items-center">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-[10px] mt-1 font-bold">Inicio</span>
+        </button>
+        <button class="text-gray-500 flex flex-col items-center" onclick="alert('Próximamente: Sistema de Referidos')">
+            <i class="fas fa-users text-xl"></i>
+            <span class="text-[10px] mt-1 font-bold">Amigos</span>
+        </button>
+        <button class="text-gray-500 flex flex-col items-center" onclick="alert('Configuración de Perfil')">
+            <i class="fas fa-user-circle text-xl"></i>
+            <span class="text-[10px] mt-1 font-bold">Perfil</span>
+        </button>
+    </div>
 
     <script src="script.js"></script>
 </body>
